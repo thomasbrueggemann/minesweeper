@@ -1,9 +1,14 @@
 #include <iostream>
 #include <cstdlib>
 
+#include "field.hpp"
+
 // MAIN
 int main()
 {
-	std::cout << "MINESWEEPER 1.0" << std::endl;
+	Field field(8, 10);
+	field.FillMines();
+	field.Print();
+
 	return EXIT_SUCCESS;
 };
