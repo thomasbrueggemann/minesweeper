@@ -4,18 +4,20 @@
 class Tile
 {
 private:
-	bool hasMine = false;
-	bool isFlagged = false;
-	unsigned int x;
-	unsigned int y;
+	int x;
+	int y;
 
 public:
+	bool hasMine = false;
+	int number;
+	bool isRevealed = false;
+	bool isFlagged = false;
+
 	Tile(bool hasMine);
-	void SetMine(bool hasMine);
-	bool HasMine();
-	void SetXY(unsigned int x, unsigned int y);
-	unsigned int GetX();
-	unsigned int GetY();
+	void setXY(int x, int y);
+
+	int getX();
+	int getY();
 };
 
 #endif

@@ -3,36 +3,24 @@
 // CONSTRUCTOR
 Tile::Tile(bool hasMine)
 {
-	this->SetMine(hasMine);
-};
-
-// SET MINE
-void Tile::SetMine(bool hasMine)
-{
 	this->hasMine = hasMine;
 };
 
-// HAS MINE
-bool Tile::HasMine()
-{
-	return this->hasMine;
-};
-
 // SET XY
-void Tile::SetXY(unsigned int x, unsigned int y)
+void Tile::setXY(int x, int y)
 {
 	this->x = x;
 	this->y = y;
 };
 
 // GET X
-unsigned int Tile::GetX()
+int Tile::getX()
 {
 	return this->x;
 };
 
 // GET Y
-unsigned int Tile::GetY()
+int Tile::getY()
 {
 	return this->y;
 };

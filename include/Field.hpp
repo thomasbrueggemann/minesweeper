@@ -4,9 +4,10 @@
 #include <iostream>
 #include <vector>
 #include <random>
-#include <algorithm>
 
 #include "Tile.hpp"
+#include "RevealResult.hpp"
+#include "FlagResult.hpp"
 
 typedef std::vector< std::vector<Tile> > Matrix;
 
@@ -14,16 +15,24 @@ class Field
 {
 private:
 	Matrix matrix;
-	unsigned int size;
-	unsigned int mines;
+	int size;
+	int mines;
 
 public:
-	Field(unsigned int size, unsigned int mines);
-	void FillMines();
-	void Print();
+	Field(int size, int mines);
+	void fillMines();
+    int calculateNumber(Tile tile);
+	void calculateNumbers();
+	RevealResult revealTiles(Tile fromTile);
+	FlagResult flagTile(Tile tile);
+    void applyAction(int x, int y, std::string action);
 
-	std::vector<Tile> GetNeighbors(Tile tile);
-	std::vector<Tile> GetNeighbors(unsigned int x, unsigned int y)
+    void printField();
+	void printMines();
+	void printNumbers();
+
+	std::vector<Tile> getNeighbors(Tile tile);
+	std::vector<Tile> getNeighbors(int x, int y);
 };
 
 #endif
