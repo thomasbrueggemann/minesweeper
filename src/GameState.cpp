@@ -33,6 +33,15 @@ void GameState::askUserAction()
     std::string askedY = "6";
     std::string askedAction = "F";
     
+    std::cout << "Column [A-H]: ";
+    std::cin >> askedX;
+    
+    std::cout << "Row [1-8]: ";
+    std::cin >> askedY;
+    
+    std::cout << "Action [F, R]: ";
+    std::cin >> askedAction;
+    
     std::vector<std::string> alphabet = {"A", "B", "C", "D", "E", "F", "G", "H"};
     
     // find letter in alphabet
@@ -44,9 +53,19 @@ void GameState::askUserAction()
     }
     
     int actionX = counter;
-    int actionY = std::atoi(askedY.c_str());
+    int actionY = std::atoi(askedY.c_str()) - 1;
     
     this->field.applyAction(actionX, actionY, askedAction);
+};
+
+// REPL
+void GameState::REPL()
+{
+    while(true)
+    {
+        this->field.printField();
+        this->askUserAction();
+    }
 };
 
 // END GAME

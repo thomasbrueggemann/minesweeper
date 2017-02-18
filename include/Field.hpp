@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <stdlib.h>
 
 #include "Tile.hpp"
 #include "RevealResult.hpp"

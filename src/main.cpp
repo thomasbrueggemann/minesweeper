@@ -8,10 +8,8 @@ int main()
 {
 	GameState state(8, 10);
 	state.startGame();
-
-	std::cout << std::endl;
-
-	state.field.printField();
+    state.REPL();
+	
     std::cout << state.endGame() << "s" << std::endl;
 
 	return EXIT_SUCCESS;

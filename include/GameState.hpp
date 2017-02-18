@@ -17,6 +17,7 @@ public:
 	GameState(int size, int mines);
 	void startGame();
     double endGame();
+    void REPL();
     
     void askUserAction();
 };

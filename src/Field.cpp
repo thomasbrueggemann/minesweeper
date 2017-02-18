@@ -118,13 +118,15 @@ void Field::printNumbers()
 // PRINT FIELD
 void Field::printField()
 {
-    std::cout << "  A B C D E F G H" << std::endl;
-    std::cout << "  ---------------" << std::endl;
+    system("clear");
+    
+    std::cout << "   A B C D E F G H" << std::endl;
+    std::cout << "   ---------------" << std::endl;
     
     int counter = 1;
     for(auto outer : this->matrix)
     {
-        std::cout << counter << "|";
+        std::cout << counter << "| ";
         
         for(auto inner : outer)
         {
@@ -196,25 +198,20 @@ RevealResult Field::revealTiles(Tile clickedTile)
 		result.alreadyFlagged = true;
 		return result;
 	}
+    
+    // a non revealed mine is found in the adjacent tiles of
+    // the neighbor
+    if(clickedTile.hasMine == false && clickedTile.isRevealed == false && clickedTile.number == 0)
+    {
+        clickedTile.isRevealed = true;
+    }
 
 	// find all tiles that are adjecent to the clicked tile
 	// that have a number value of 0, recursively
 	std::vector<Tile> neighbors = this->getNeighbors(clickedTile);
 	for(auto &tile : neighbors)
 	{
-		// get the neighbors of the clicked neighbor
-		std::vector<Tile> neighborsNeighbors = this->getNeighbors(tile);
-		for(auto &neighborsNeighbor : neighborsNeighbors)
-		{
-            this->revealTiles(neighborsNeighbor);
-		}
-
-        // a non revealed mine is found in the adjacent tiles of
-        // the neighbor
-        if(tile.hasMine == false && tile.isRevealed == false && tile.number == 0)
-        {
-            tile.isRevealed = true;
-        }
+        //this->revealTiles(tile);
 	}
 
 	result.ok = true;
