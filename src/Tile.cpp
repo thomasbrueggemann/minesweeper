@@ -24,3 +24,9 @@ int Tile::getY()
 {
 	return this->y;
 };
+
+// IS THE SAME AS
+bool Tile::isTheSameAs(Tile same)
+{
+    return (this->x == same.getX() && this->y == same.getY());
+};

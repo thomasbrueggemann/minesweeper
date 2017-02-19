@@ -15,6 +15,7 @@ public:
 
 	Tile(bool hasMine);
 	void setXY(int x, int y);
+    bool isTheSameAs(Tile same);
 
 	int getX();
 	int getY();

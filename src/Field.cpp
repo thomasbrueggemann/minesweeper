@@ -174,9 +174,17 @@ std::vector<Tile> Field::getNeighbors(int x, int y)
 };
 
 // REVEAL TILES
-RevealResult Field::revealTiles(Tile clickedTile)
+RevealResult Field::revealTiles(Tile &clickedTile)
+{
+    std::vector<Tile> tiles;
+    return this->revealTiles(clickedTile, tiles);
+};
+
+// REVEAL TILES
+RevealResult Field::revealTiles(Tile &clickedTile, std::vector<Tile> &visited)
 {
 	RevealResult result;
+    visited.push_back(clickedTile);
 
 	// check for mine hit that has not been revealed before
 	if(clickedTile.hasMine == true && clickedTile.isRevealed == false)
@@ -201,7 +209,7 @@ RevealResult Field::revealTiles(Tile clickedTile)
     
     // a non revealed mine is found in the adjacent tiles of
     // the neighbor
-    if(clickedTile.hasMine == false && clickedTile.isRevealed == false && clickedTile.number == 0)
+    if((clickedTile.hasMine == false && clickedTile.isRevealed == false) || clickedTile.number == 0)
     {
         clickedTile.isRevealed = true;
     }
@@ -211,7 +219,23 @@ RevealResult Field::revealTiles(Tile clickedTile)
 	std::vector<Tile> neighbors = this->getNeighbors(clickedTile);
 	for(auto &tile : neighbors)
 	{
-        //this->revealTiles(tile);
+        bool alreadyChecked = false;
+        
+        // check if a tile with the same coordinates has already been checked
+        for(auto visitTile : visited)
+        {
+            if(tile.isTheSameAs(visitTile))
+            {
+                alreadyChecked = true;
+                break;
+            }
+        }
+        
+        // only continue recursively if this tile has not beed visited yet
+        if(alreadyChecked == false)
+        {
+            this->revealTiles(tile, visited);
+        }
 	}
 
 	result.ok = true;
@@ -219,7 +243,7 @@ RevealResult Field::revealTiles(Tile clickedTile)
 };
 
 // FLAG TILE
-FlagResult Field::flagTile(Tile tile)
+FlagResult Field::flagTile(Tile &tile)
 {
 	FlagResult result;
 
@@ -239,18 +263,15 @@ FlagResult Field::flagTile(Tile tile)
 // APPLY ACTION
 void Field::applyAction(int x, int y, std::string action)
 {
-    // fetch the action tile
-    Tile t = this->matrix[x][y];
-    
     // flag
     if(action == "F")
     {
-        this->flagTile(t);
+        this->flagTile(this->matrix[x][y]);
     }
     
     // reveal
     if(action == "R")
     {
-        this->revealTiles(t);
+        this->revealTiles(this->matrix[x][y]);
     }
 };

@@ -35,12 +35,14 @@ void GameState::askUserAction()
     
     std::cout << "Column [A-H]: ";
     std::cin >> askedX;
+    std::transform(askedX.begin(), askedX.end(), askedX.begin(), ::toupper);
     
     std::cout << "Row [1-8]: ";
     std::cin >> askedY;
     
     std::cout << "Action [F, R]: ";
     std::cin >> askedAction;
+    std::transform(askedAction.begin(), askedAction.end(), askedAction.begin(), ::toupper);
     
     std::vector<std::string> alphabet = {"A", "B", "C", "D", "E", "F", "G", "H"};
     

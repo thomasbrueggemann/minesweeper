@@ -22,11 +22,14 @@ private:
 public:
 	Field(int size, int mines);
 	void fillMines();
+    FlagResult flagTile(Tile &tile);
+    void applyAction(int x, int y, std::string action);
+    
     int calculateNumber(Tile tile);
 	void calculateNumbers();
-	RevealResult revealTiles(Tile fromTile);
-	FlagResult flagTile(Tile tile);
-    void applyAction(int x, int y, std::string action);
+    
+	RevealResult revealTiles(Tile &fromTile);
+    RevealResult revealTiles(Tile &clickedTile, std::vector<Tile> &visited);
 
     void printField();
 	void printMines();

@@ -2,6 +2,8 @@
 #define STATE_HPP
 
 #include <chrono>
+#include <algorithm>
+
 #include "Field.hpp"
 
 using namespace std::chrono;
